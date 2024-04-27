@@ -4,11 +4,13 @@
   "description": "A Node.js RESTful API Project FC3",
   "main": "index.js",
   "scripts": {
-    "test": "echo \\\"Error: not test specified\\\\ && exit 1\\\"\""
+    "test": "echo \\\"Error: not test specified\\\\ && exit 1\\\"\"",
+    "start": "nodemon server.js"
   },
   "author": "ZarZai",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
   }
 }

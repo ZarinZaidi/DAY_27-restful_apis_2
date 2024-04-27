@@ -8,7 +8,7 @@ const app = express();
 const morgan = require("morgan");
 
 //Import 'body-parser' middleware for parsing request bodies
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 
 //Import the routes for products and orders
 const productRoutes = require("./api/routes/products");
@@ -17,13 +17,18 @@ const ordersRoutes = require("./api/routes/orders");
 
 //Middleware setup
 app.use(morgan("dev")); //Logging HTTP request in dev mode
-app.use(bodyParser.urlencoded({ extended: false })); //Parsing the diff url-encoded bodies
-app.use(bodyParser.json()); //Parsing the JSON request bodies
+// app.use(bodyParser.urlencoded({ extended: false })); //Parsing the diff url-encoded bodies
+// app.use(bodyParser.json()); //Parsing the JSON request bodies
+app.use(express.json());
+
 
 //Routes setup
 app.use("/products", productRoutes); //Assigning routes for products
 app.use("/orders", ordersRoutes); //Assigning routes for orders
 
+app.get('/', (req, res) => {
+    res.json({ message: 'Hello, welcome to Assignment submission page. Task given is as below:' });
+});
 
 //Middleware to handle 404 errors
 app.use((req, res, next) => {
@@ -37,7 +42,7 @@ app.use((req, res, next) => {
     req.status(error.status || 500); //Set response status based on error status received or default to 500 (Internal server error)
     req.json({
         error: {
-            message: erro.message
+            message: error.message
         }
     }); //Send JSON response with error message
 });
