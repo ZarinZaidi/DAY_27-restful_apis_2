@@ -10,16 +10,15 @@ const morgan = require("morgan");
 //Import 'body-parser' middleware for parsing request bodies
 const bodyParser = require("body-parser");
 
-//Import the routes for products and orders
-const productRoutes = require("./api/routes/products");
-const ordersRoutes = require("./api/routes/orders");
-
-
 //Middleware setup
 app.use(morgan("dev")); //Logging HTTP request in dev mode
 app.use(bodyParser.urlencoded({ extended: false })); //Parsing the diff url-encoded bodies
 app.use(bodyParser.json()); //Parsing the JSON request bodies
 
+
+//Import the routes for products and orders
+const productRoutes = require("./api/routes/products");
+const ordersRoutes = require("./api/routes/orders");
 
 //Routes setup
 app.use("/products", productRoutes); //Assigning routes for products
@@ -33,7 +32,7 @@ app.get('/', (req, res) => {
 app.use((req, res, next) => {
     const error = new Error("Not found");
     error.status = 404;
-    next(error);
+    next(error);//to pass to other middleware
 })
 
 //Middleware to handle 500 errors

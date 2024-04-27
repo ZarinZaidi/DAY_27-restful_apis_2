@@ -1,3 +1,4 @@
+//Importing the express module and create new router instance from the express module
 const router = require('express').Router();
 
 //Handle incoming GET requests to /orders
