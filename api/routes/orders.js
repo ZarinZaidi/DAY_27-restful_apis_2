@@ -9,6 +9,16 @@ router.get('/', (req, res, next) => {
     });
 });
 
+//Handle incoming GET requests to /orders for specific id
+router.get('/:id', (req, res, next) => {
+    const productId = req.params.id;
+    if (productId === 'special') {
+        return res.status(200).json({ message: `Orders with id: ${productId}` });
+    }
+    res.json({ message: 'Not a special order' });
+    next(); //move on to the next middleware
+});
+
 //Handle incoming POST requests to /orders
 router.post('/', (req, res) => {
     //create new orders from a request body
