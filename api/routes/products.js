@@ -32,4 +32,14 @@ router.post('/', (req, res) => {
     });
 });
 
+//Handle incoming PATCH requests to /products for specific id
+router.patch('/:id', (req, res, next) => {
+    res.status(200).json({ message: 'Updated product!' });
+});
+
+//Handle incoming DELETE requests to /products for specific id
+router.delete('/:id', (req, res, next) => {
+    res.status(200).json({ message: 'Deleted product!' });
+});
+
 module.exports = router;
