@@ -15,6 +15,19 @@ app.use(morgan("dev")); //Logging HTTP request in dev mode
 app.use(bodyParser.urlencoded({ extended: false })); //Parsing the diff url-encoded bodies
 app.use(bodyParser.json()); //Parsing the JSON request bodies
 
+//CORS(cross origin resource sharing) handling middleware to allow requests from any origin
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); //Allow requests from any origin
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    ); //Allow specified headers in requests
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, DELETE, GET'); //Allow specified HTTP methods
+        return res.status(200).json({}); //respond with an empty json object for options request
+    }
+    next(); //move on to the next middleware
+});
 
 //Import the routes for products and orders
 const productRoutes = require("./api/routes/products");
