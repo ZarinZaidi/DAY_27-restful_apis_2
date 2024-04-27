@@ -15,8 +15,7 @@ router.get('/:id', (req, res, next) => {
     if (name === 'special') {
         return res.status(200).json({ message: `Products with name: ${name}` });
     }
-    res.json({ message: 'Not a special product' });
-    next(); //move on to the next middleware
+    res.status(200).json({ message: 'Not a special product' });
 });
 
 //Handle incoming POST requests to /orders
