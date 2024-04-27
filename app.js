@@ -31,3 +31,16 @@ app.use((req, res, next) => {
     error.status = 404;
     next(error);
 })
+
+//Middleware to handle 500 errors
+app.use((req, res, next) => {
+    req.status(error.status || 500); //Set response status based on error status received or default to 500 (Internal server error)
+    req.json({
+        error: {
+            message: erro.message
+        }
+    }); //Send JSON response with error message
+});
+
+//Exporting the Express app for use in other modules
+module.exports = app;
